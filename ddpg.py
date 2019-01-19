@@ -158,5 +158,6 @@ def playGame(train_indicator=0):    #1 means Train, 0 means simply Run
     env.end()  # This is for shutting down TORCS
     print("Finish.")
 
+
 if __name__ == "__main__":
     playGame()

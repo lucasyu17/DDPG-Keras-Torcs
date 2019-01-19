@@ -43,7 +43,7 @@ class CriticNetwork(object):
         self.target_model.set_weights(critic_target_weights)
 
     def create_critic_network(self, state_size,action_dim):
-        print("Now we build the model")
+        print("Now we build the critic model")
         S = Input(shape=[state_size])  
         A = Input(shape=[action_dim],name='action2')   
         w1 = Dense(HIDDEN1_UNITS, activation='relu')(S)
