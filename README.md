@@ -27,4 +27,3 @@ python ddpg.py
 
 (Change the flag **train_indicator**=1 in ddpg.py if you want to train the network)
 
-----
