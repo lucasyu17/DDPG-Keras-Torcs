@@ -305,7 +305,7 @@ class ServerState(object):
         self.d = dict()
 
     def parse_server_str(self, server_string):
-        u'''Parse the server string.'''
+        u"""Parse the server string."""
         self.servstr = server_string.strip()[:-1]
         sslisted = self.servstr.strip().lstrip(u'(').rstrip(u')').split(u')(')
         for i in sslisted:
@@ -461,10 +461,10 @@ class ServerState(object):
 
 
 class DriverAction(object):
-    u'''What the driver is intending to do (i.e. send to the server).
+    u"""What the driver is intending to do (i.e. send to the server).
     Composes something like this for the server:
     (accel 1)(brake 0)(gear 1)(steer 0)(clutch 0)(focus 0)(meta 0) or
-    (accel 1)(brake 0)(gear 1)(steer 0)(clutch 0)(focus -90 -45 0 45 90)(meta 0)'''
+    (accel 1)(brake 0)(gear 1)(steer 0)(clutch 0)(focus -90 -45 0 45 90)(meta 0)"""
 
     def __init__(self):
         self.actionstr = unicode()
@@ -589,9 +589,10 @@ def drive_example(c):
 
 # ================ MAIN ================
 if __name__ == u"__main__":
-    C = Client(p=3101)
+    C = Client(p=3001)
     for step in xrange(C.maxSteps, 0, -1):
         C.get_servers_input()
         drive_example(C)
         C.respond_to_server()
+
     C.shutdown()
