@@ -18,7 +18,7 @@ LRC = 0.001  # Lerning rate for Critic
 EXPLORE = 100000.
 
 
-def play_game(train_indicator=0):  # 1 means Train, 0 means simply Run
+def play_game(train_indicator=1):  # 1 means Train, 0 means simply Run
     action_dim = 3  # Steering/Acceleration/Brake
     state_dim = 29  # of sensors input
 
@@ -56,7 +56,7 @@ def play_game(train_indicator=0):  # 1 means Train, 0 means simply Run
     except:
         print("Cannot find the weight")
 
-    print("TORCS Experiment Start.")
+    print("TORCS Experiment Start...")
     for i in range(episode_count):
 
         print("Episode : " + str(i) + " Replay Buffer " + str(buff.count()))
@@ -65,8 +65,8 @@ def play_game(train_indicator=0):  # 1 means Train, 0 means simply Run
             ob = env.reset(relaunch=True)  # relaunch TORCS every 3 episode because of the memory leak error
         else:
             ob = env.reset()
-        s_t = np.hstack(
-            (ob.angle, ob.track, ob.trackPos, ob.speedX, ob.speedY, ob.speedZ, ob.wheelSpinVel / 100.0, ob.rpm))
+        s_t = np.hstack((ob.angle, ob.track, ob.trackPos, ob.speedX, ob.speedY, ob.speedZ,
+                         ob.wheelSpinVel / 100.0, ob.rpm))
 
         total_reward = 0.
         for j in range(max_steps):
@@ -76,6 +76,7 @@ def play_game(train_indicator=0):  # 1 means Train, 0 means simply Run
             noise_t = np.zeros([1, action_dim])
 
             a_t_original = actor.model.predict(s_t.reshape(1, s_t.shape[0]))
+            # shape: [s_t.shape[0]] --> [[s_t.shape[0]]
             noise_t[0][0] = train_indicator * max(epsilon, 0) * OU.function(a_t_original[0][0], 0.0, 0.60, 0.30)
             noise_t[0][1] = train_indicator * max(epsilon, 0) * OU.function(a_t_original[0][1], 0.5, 1.00, 0.10)
             noise_t[0][2] = train_indicator * max(epsilon, 0) * OU.function(a_t_original[0][2], -0.1, 1.00, 0.05)
@@ -90,7 +91,6 @@ def play_game(train_indicator=0):  # 1 means Train, 0 means simply Run
             a_t[0][2] = a_t_original[0][2] + noise_t[0][2]
 
             ob, r_t, done, info = env.step(a_t[0])
-
             s_t1 = np.hstack((ob.angle, ob.track, ob.trackPos, ob.speedX, ob.speedY, ob.speedZ,
                               ob.wheelSpinVel / 100.0, ob.rpm))
 
@@ -116,8 +116,8 @@ def play_game(train_indicator=0):  # 1 means Train, 0 means simply Run
 
             if train_indicator:
                 loss += critic.model.train_on_batch([states, actions], y_t)
-                a_for_grad = actor.model.predict(states)
-                grads = critic.gradients(states, a_for_grad)
+                action_for_grad = actor.model.predict(states)
+                grads = critic.gradients(states, action_for_grad)
                 actor.train(states, grads)
                 actor.target_train()
                 critic.target_train()

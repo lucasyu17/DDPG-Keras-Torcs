@@ -24,7 +24,7 @@ def obs_vision_to_image_rgb(obs_image_vec):  # get the rgb information from the 
 
 
 class TorcsEnv:
-    terminal_judge_start = 100  # If after 100 timestep still no progress, terminated
+    terminal_judge_start = 100  # If after 100 time step still no progress, terminated
     termination_limit_progress = 5  # [km/h], episode terminates if car is running slower than this limit
     default_speed = 50
 

@@ -2,13 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="19bbc1a9-d373-4c66-bb21-d4e754cca732" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/PriorityReplayBuffer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ActorNetwork.py" beforeDir="false" afterPath="$PROJECT_DIR$/ActorNetwork.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CriticNetwork.py" beforeDir="false" afterPath="$PROJECT_DIR$/CriticNetwork.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OU.py" beforeDir="false" afterPath="$PROJECT_DIR$/OU.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReplayBuffer.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReplayBuffer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/actormodel.h5" beforeDir="false" afterPath="$PROJECT_DIR$/actormodel.h5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/criticmodel.h5" beforeDir="false" afterPath="$PROJECT_DIR$/criticmodel.h5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/criticmodel.json" beforeDir="false" afterPath="$PROJECT_DIR$/criticmodel.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ddpg.py" beforeDir="false" afterPath="$PROJECT_DIR$/ddpg.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gym_torcs.py" beforeDir="false" afterPath="$PROJECT_DIR$/gym_torcs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/snakeoil3_gym.py" beforeDir="false" afterPath="$PROJECT_DIR$/snakeoil3_gym.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,38 +31,64 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="h5" value="1" />
-          <entry key="py" value="8" />
+          <entry key="py" value="11" />
           <entry key="sh" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="8" />
+          <entry key="Python" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Python Console" value="88" />
-          <entry key="py" value="335" />
+          <entry key="Python Console" value="277" />
+          <entry key="py" value="3169" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="423" />
+          <entry key="Python" value="3446" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ddpg.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
-              <caret line="151" lean-forward="true" selection-start-line="151" selection-end-line="151" />
+            <state relative-caret-position="162">
+              <caret line="6" column="29" selection-start-line="6" selection-end-line="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ReplayBuffer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-207">
+              <caret line="16" selection-start-line="16" selection-end-line="16" />
               <folding>
-                <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/PriorityReplayBuffer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret line="39" selection-start-line="39" selection-end-line="39" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+                <element signature="e#150#222#0" />
+                <element signature="e#217#250#0" />
+                <element signature="e#290#307#0" />
+                <element signature="e#413#750#0" />
+                <element signature="e#491#581#0" />
               </folding>
             </state>
           </provider>
@@ -68,10 +97,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CriticNetwork.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="30" column="13" lean-forward="true" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+            <state relative-caret-position="648">
+              <caret line="45" column="31" selection-start-line="45" selection-start-column="31" selection-end-line="45" selection-end-column="31" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ActorNetwork.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="27" column="84" selection-start-line="27" selection-start-column="84" selection-end-line="27" selection-end-column="84" />
+              <folding>
+                <element signature="e#0#40#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -81,7 +122,7 @@
         <entry file="file://$PROJECT_DIR$/OU.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="270">
-              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+              <caret line="10" selection-start-line="10" selection-end-line="10" />
             </state>
           </provider>
         </entry>
@@ -89,15 +130,36 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gym_torcs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
-              <caret line="241" column="32" lean-forward="true" selection-start-line="241" selection-start-column="32" selection-end-line="241" selection-end-column="32" />
+            <state relative-caret-position="513">
+              <caret line="29" selection-start-line="29" selection-end-line="29" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
+                <element signature="e#293#594#0" />
                 <element signature="e#529#2113#0" />
+                <element signature="e#2319#6359#0" />
+                <element signature="e#6651#7558#0" />
                 <element signature="e#7142#7166#0" />
                 <element signature="e#7199#7222#0" />
                 <element signature="e#7665#7966#0" />
                 <element signature="e#7635#7980#0" />
+                <element signature="e#8429#11139#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/snakeoil3_gym.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="5" column="59" selection-start-line="5" selection-start-column="59" selection-end-line="5" selection-end-column="59" />
+              <folding>
+                <element signature="e#3905#5359#0" />
+                <element signature="e#5388#12447#0" />
+                <element signature="e#12481#20029#0" />
+                <element signature="e#20064#22914#0" />
+                <element signature="e#22969#23404#0" />
+                <element signature="e#23433#24443#0" />
               </folding>
             </state>
           </provider>
@@ -112,28 +174,17 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ActorNetwork.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="472">
-              <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
-              <folding>
-                <element signature="e#0#40#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>vision</find>
-      <find>buff</find>
-      <find>3001</find>
-      <find>snakeoil3</find>
-      <find>3101</find>
-      <find>torcs_action</find>
       <find>agent_to_torcs</find>
       <find>copy</find>
       <find>self.client</find>
@@ -158,6 +209,12 @@
       <find>rpm</find>
       <find>action_dim</find>
       <find>self.mod</find>
+      <find>HIDDEN1_UNITS</find>
+      <find>a_for_grad</find>
+      <find>rewa</find>
+      <find>terminal_judge_start</find>
+      <find>env</find>
+      <find>train_indicator</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -167,11 +224,13 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/snakeoil3_gym.py" />
-        <option value="$PROJECT_DIR$/gym_torcs.py" />
         <option value="$PROJECT_DIR$/OU.py" />
         <option value="$PROJECT_DIR$/ActorNetwork.py" />
         <option value="$PROJECT_DIR$/CriticNetwork.py" />
+        <option value="$PROJECT_DIR$/gym_torcs.py" />
         <option value="$PROJECT_DIR$/ddpg.py" />
+        <option value="$PROJECT_DIR$/ReplayBuffer.py" />
+        <option value="$PROJECT_DIR$/PriorityReplayBuffer.py" />
       </list>
     </option>
   </component>
@@ -225,7 +284,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Reinforcement-learning-with-tensorflow" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
@@ -352,7 +411,7 @@
     <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14506343" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14506343" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -367,7 +426,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="11" />
-      <window_info anchor="bottom" id="Python Console" order="12" visible="true" weight="0.28824142" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="12" visible="true" weight="0.37669095" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -404,13 +463,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/snakeoil3_gym.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1407">
-          <caret line="467" lean-forward="true" selection-start-line="467" selection-end-line="467" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.local/lib/python2.7/site-packages/gym/spaces/box.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
@@ -421,51 +473,92 @@
     <entry file="file://$PROJECT_DIR$/OU.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ActorNetwork.py">
+    <entry file="file://$PROJECT_DIR$/snakeoil3_gym.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
+        <state relative-caret-position="135">
+          <caret line="5" column="59" selection-start-line="5" selection-start-column="59" selection-end-line="5" selection-end-column="59" />
           <folding>
-            <element signature="e#0#40#0" expanded="true" />
+            <element signature="e#3905#5359#0" />
+            <element signature="e#5388#12447#0" />
+            <element signature="e#12481#20029#0" />
+            <element signature="e#20064#22914#0" />
+            <element signature="e#22969#23404#0" />
+            <element signature="e#23433#24443#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gym_torcs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="241" column="32" lean-forward="true" selection-start-line="241" selection-start-column="32" selection-end-line="241" selection-end-column="32" />
+        <state relative-caret-position="513">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#293#594#0" />
             <element signature="e#529#2113#0" />
+            <element signature="e#2319#6359#0" />
+            <element signature="e#6651#7558#0" />
             <element signature="e#7142#7166#0" />
             <element signature="e#7199#7222#0" />
             <element signature="e#7665#7966#0" />
             <element signature="e#7635#7980#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CriticNetwork.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="30" column="13" lean-forward="true" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#8429#11139#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ddpg.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="151" lean-forward="true" selection-start-line="151" selection-end-line="151" />
+        <state relative-caret-position="162">
+          <caret line="6" column="29" selection-start-line="6" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ReplayBuffer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-207">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CriticNetwork.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="648">
+          <caret line="45" column="31" selection-start-line="45" selection-start-column="31" selection-end-line="45" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ActorNetwork.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="84" selection-start-line="27" selection-start-column="84" selection-end-line="27" selection-end-column="84" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PriorityReplayBuffer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="39" selection-start-line="39" selection-end-line="39" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+            <element signature="e#150#222#0" />
+            <element signature="e#217#250#0" />
+            <element signature="e#290#307#0" />
+            <element signature="e#413#750#0" />
+            <element signature="e#491#581#0" />
           </folding>
         </state>
       </provider>

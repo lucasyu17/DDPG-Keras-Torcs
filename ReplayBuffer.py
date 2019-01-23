@@ -1,8 +1,8 @@
 from collections import deque
 import random
 
-class ReplayBuffer(object):
 
+class ReplayBuffer(object):
     def __init__(self, buffer_size):
         self.buffer_size = buffer_size
         self.num_experiences = 0
@@ -35,3 +35,4 @@ class ReplayBuffer(object):
     def erase(self):
         self.buffer = deque()
         self.num_experiences = 0
+

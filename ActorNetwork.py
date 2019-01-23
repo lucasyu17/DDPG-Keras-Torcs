@@ -5,8 +5,8 @@ from keras.initializations import normal
 from keras.layers import Dense, Input, merge
 from keras.models import Model
 
-HIDDEN1_UNITS = 300
-HIDDEN2_UNITS = 600
+# HIDDEN1_UNITS = 300
+# HIDDEN2_UNITS = 600
 
 
 class ActorNetwork(object):
@@ -15,7 +15,8 @@ class ActorNetwork(object):
         self.BATCH_SIZE = BATCH_SIZE
         self.TAU = TAU
         self.LEARNING_RATE = LEARNING_RATE
-
+        self.hidden_units_1 = 300
+        self.hidden_units_2 = 600
         K.set_session(sess)
 
         # Now create the model
@@ -34,6 +35,9 @@ class ActorNetwork(object):
         })
 
     def target_train(self):
+        """
+        renew the target network (slowly converge, represent the long-term target)
+        """
         actor_weights = self.model.get_weights()
         actor_target_weights = self.target_model.get_weights()
         for i in xrange(len(actor_weights)):
@@ -41,10 +45,16 @@ class ActorNetwork(object):
         self.target_model.set_weights(actor_target_weights)
 
     def create_actor_network(self, state_size, action_dim):
+        """
+        the network which map the state to the next action.
+        :param state_size: shape of the state
+        :param action_dim: shape of the action space
+        :return: action
+        """
         print("Now we build the actor model")
         S = Input(shape=[state_size])
-        h0 = Dense(HIDDEN1_UNITS, activation='relu')(S)
-        h1 = Dense(HIDDEN2_UNITS, activation='relu')(h0)
+        h0 = Dense(self.hidden_units_1, activation='relu')(S)
+        h1 = Dense(self.hidden_units_2, activation='relu')(h0)
         Steering = Dense(1, activation='tanh', init=lambda shape, name: normal(shape, scale=1e-4, name=name))(h1)
         Acceleration = Dense(1, activation='sigmoid', init=lambda shape, name: normal(shape, scale=1e-4, name=name))(h1)
         Brake = Dense(1, activation='sigmoid', init=lambda shape, name: normal(shape, scale=1e-4, name=name))(h1)
