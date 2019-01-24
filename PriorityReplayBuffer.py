@@ -52,7 +52,7 @@ class PriorityReplayBuffer(ReplayBuffer):
     def build_seg_tree(self, batch_size):
         this_size = max(self.buffer_size, self.num_experiences)
         num_segs = this_size // batch_size
-        
+
         for i in range(0,num_segs,2):
 
 
