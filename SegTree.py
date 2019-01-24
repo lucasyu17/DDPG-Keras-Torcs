@@ -26,6 +26,21 @@ class SegTree(object):
             tree_index = (tree_index - 1) // 2
             self.tree[tree_index] += change
 
+    def get_leaf(self, v):
+        search_index = 0  # search downward in the segment tree
+        while True:
+            if search_index > self.capacity - 1:  # reach the leafs
+                data_index = search_index - (self.capacity - 1)
+                return search_index, self.tree[search_index], self.data[data_index]
+            else:
+                l_son = 2 * search_index + 1
+                r_son = l_son + 1
+            if self.tree[l_son] >= v:
+                search_index = l_son
+            else:
+                search_index = r_son
+                v -= self.tree[l_son]
+
     def get_capacity(self, leaf_index):
         return self.tree[leaf_index + self.capacity - 1]
 
@@ -44,32 +59,20 @@ class PrioritizedReplayBuff(object):
     def choose(self, batch_size):
         num_batch = self.capacity // batch_size
         res_collection = []
+        index_collection = []
         print("tree sum: ", self.segtree.get_sum())
-        for i in range(num_batch):
-            search_index = 0  # search downward in the segment tree
-            rand = random.uniform(0, self.segtree.get_sum())
-            print("target to find position: ", rand)
-            while True:
-                if search_index > self.capacity - 1:  # reach the leafs
-                    res_collection.append(self.segtree.tree[search_index])
-                    break
-                else:
-                    l_son = 2 * search_index + 1
-                    r_son = l_son + 1
-                if self.segtree.tree[l_son] > rand:
-                    search_index = l_son
-                else:
-                    search_index = r_son
-                    rand = rand - self.segtree.tree[l_son]
+        for i in xrange(num_batch):
+
         print("final search results: ", res_collection)
+        print("final index results: ", index_collection)
 
 
 if __name__ == '__main__':
-    buff = PrioritizedReplayBuff(capacity=10)
-    for i in range(1, 11):
+    buff = PrioritizedReplayBuff(capacity=6)
+    for i in range(1, 7):
         data = 0.1
         buff.add(data, float(i)/10)
-    buff.choose(batch_size=5)
+    buff.choose(batch_size=2)
 
 
 
