@@ -15,8 +15,9 @@ class SegTree(object):
         self.data[self.data_point] = data
         tree_index = self.data_point + self.capacity - 1
         self.update(new_priority=new_priority, tree_index=tree_index)
+
         self.data_point += 1
-        if self.data_point > self.capacity:
+        if self.data_point >= self.capacity:
             self.data_point = 0
 
     def update(self, new_priority, tree_index):
@@ -27,19 +28,21 @@ class SegTree(object):
             self.tree[tree_index] += change
 
     def get_leaf(self, v):
-        search_index = 0  # search downward in the segment tree
+        parent_index = 0  # search downward in the segment tree
         while True:
-            if search_index > self.capacity - 1:  # reach the leafs
-                data_index = search_index - (self.capacity - 1)
-                return search_index, self.tree[search_index], self.data[data_index]
+            l_son = 2 * parent_index + 1
+            r_son = l_son + 1
+            if l_son > self.capacity - 1:  # reach the leafs
+                leaf_index = l_son
+                break
             else:
-                l_son = 2 * search_index + 1
-                r_son = l_son + 1
-            if self.tree[l_son] >= v:
-                search_index = l_son
-            else:
-                search_index = r_son
-                v -= self.tree[l_son]
+                if self.tree[l_son] >= v:
+                    parent_index = l_son
+                else:
+                    parent_index = r_son
+                    v -= self.tree[l_son]
+        data_index = leaf_index - (self.capacity - 1)
+        return leaf_index, self.tree[leaf_index], self.data[data_index]
 
     def get_capacity(self, leaf_index):
         return self.tree[leaf_index + self.capacity - 1]
@@ -60,16 +63,22 @@ class PrioritizedReplayBuff(object):
         num_batch = self.capacity // batch_size
         res_collection = []
         index_collection = []
+        vs = []
         print("tree sum: ", self.segtree.get_sum())
-        for i in xrange(num_batch):
-
+        for i_batch in xrange(num_batch):
+            rand = random.uniform(0, self.segtree.get_sum())
+            vs.append(rand)
+            res_index, res_leaf, _ = self.segtree.get_leaf(rand)
+            index_collection.append(res_index)
+            res_collection.append(res_leaf)
+        print("values to locate: ", vs)
         print("final search results: ", res_collection)
         print("final index results: ", index_collection)
 
 
 if __name__ == '__main__':
-    buff = PrioritizedReplayBuff(capacity=6)
-    for i in range(1, 7):
+    buff = PrioritizedReplayBuff(capacity=8)
+    for i in range(1, 9):
         data = 0.1
         buff.add(data, float(i)/10)
     buff.choose(batch_size=2)
