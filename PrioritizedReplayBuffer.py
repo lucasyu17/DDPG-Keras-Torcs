@@ -68,6 +68,7 @@ class PrioritizedReplayBuff(object):
         self.delta_beta = 0.001
         self.epsilon = 0.001
         self.p_limit = 1.
+        self.lmd = 0.5
 
     def store(self, data):
         max_p = max(self.segtree[-self.capacity:])
@@ -99,10 +100,11 @@ class PrioritizedReplayBuff(object):
 
         return batch_index, batch_transition, ISWeights
 
-    def update(self, batch_index, TD_err):
+    def update(self, batch_index, td_errs, grads_square):
         """renew the priorities and parameter beta"""
-        for i_index, i_delta in zip(batch_index, TD_err):
-            self.segtree.update(min(self.p_limit, TD_err + self.epsilon), i_index)
+        for i_index, i_td_err, i_grad in zip(batch_index, td_errs, grads_square):
+            i_p = min(self.p_limit, i_td_err + self.lmd*i_grad + self.epsilon)
+            self.segtree.update(i_p, i_index)
 
         self.beta += self.delta_beta
         self.beta = min(self.beta, self.p_limit)

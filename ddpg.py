@@ -114,6 +114,7 @@ def play_game(train_indicator=1, usePrioReplayBuff=False):
                 s_t1 = np.hstack((ob.angle, ob.track, ob.trackPos, ob.speedX, ob.speedY, ob.speedZ,
                                   ob.wheelSpinVel / 100.0, ob.rpm))
 
+                batch_index = []
                 if usePrioReplayBuff:
                     # Add transition to replay buffer: (state_t, action_t, reward_t, state_t+1, end_or_not)
                     transition = np.hstack(s_t, a_t[0], r_t, s_t1, done)
@@ -136,22 +137,23 @@ def play_game(train_indicator=1, usePrioReplayBuff=False):
                 dones = np.asarray([e[4] for e in batch])
                 y_t = np.asarray([e[1] for e in batch])
 
-                target_q_values = critic.target_model.predict([new_states, actor.target_model.predict(new_states)])
+                target_q_values_t_plus_one = critic.target_model.predict([new_states, actor.target_model.predict(new_states)])
 
                 for k in range(len(batch)):
                     if dones[k]:
                         y_t[k] = rewards[k]
                     else:
-                        y_t[k] = rewards[k] + GAMMA * target_q_values[k]
+                        y_t[k] = rewards[k] + GAMMA * target_q_values_t_plus_one[k]
 
                 if train_indicator:
-                    delta_loss = critic.model.train_on_batch([states, actions], y_t)
-                    loss += delta_loss
+                    loss += critic.model.train_on_batch([states, actions], y_t)
                     action_for_grad = actor.model.predict(states)
                     grads = critic.gradients(states, action_for_grad)
+                    grads_squared = np.square(grads)
                     if usePrioReplayBuff:
-                        # grad_norm2 = np.linalg.norm(grads, ord=2)
-                        buff.update(batch_index, loss, grads)
+                        target_q_values_t = critic.target_model.predict([states, actions])
+                        td_errs_squared = np.square(y_t - target_q_values_t)
+                        buff.update(batch_index, td_errs_squared, grads_squared)
 
                     actor.train(states, grads)
                     actor.target_train()
@@ -187,4 +189,4 @@ def play_game(train_indicator=1, usePrioReplayBuff=False):
 
 
 if __name__ == "__main__":
-    play_game()
+    play_game(usePrioReplayBuff=True)
