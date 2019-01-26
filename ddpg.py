@@ -113,15 +113,22 @@ def play_game(train_indicator=1, usePrioReplayBuff=False):
                 ob, r_t, done, info = env.step(a_t[0])
                 s_t1 = np.hstack((ob.angle, ob.track, ob.trackPos, ob.speedX, ob.speedY, ob.speedZ,
                                   ob.wheelSpinVel / 100.0, ob.rpm))
-                # Add transition to replay buffer: (state_t, action_t, reward_t, state_t+1, end_or_not)
+
                 if usePrioReplayBuff:
+                    # Add transition to replay buffer: (state_t, action_t, reward_t, state_t+1, end_or_not)
                     transition = np.hstack(s_t, a_t[0], r_t, s_t1, done)
                     buff.store(transition)
+
+                    # Do the batch update
+                    batch_index, batch, batch_ISWeight = buff.sample(BATCH_SIZE)
+
                 else:
+                    # Add transition to replay buffer: (state_t, action_t, reward_t, state_t+1, end_or_not)
                     buff.add(s_t, a_t[0], r_t, s_t1, done)
 
-                # Do the batch update
-                batch = buff.getBatch(BATCH_SIZE)
+                    # Do the batch update
+                    batch = buff.getBatch(BATCH_SIZE)
+
                 states = np.asarray([e[0] for e in batch])
                 actions = np.asarray([e[1] for e in batch])
                 rewards = np.asarray([e[2] for e in batch])
@@ -138,9 +145,14 @@ def play_game(train_indicator=1, usePrioReplayBuff=False):
                         y_t[k] = rewards[k] + GAMMA * target_q_values[k]
 
                 if train_indicator:
-                    loss += critic.model.train_on_batch([states, actions], y_t)
+                    delta_loss = critic.model.train_on_batch([states, actions], y_t)
+                    loss += delta_loss
                     action_for_grad = actor.model.predict(states)
                     grads = critic.gradients(states, action_for_grad)
+                    if usePrioReplayBuff:
+                        # grad_norm2 = np.linalg.norm(grads, ord=2)
+                        buff.update(batch_index, loss, grads)
+
                     actor.train(states, grads)
                     actor.target_train()
                     critic.target_train()
