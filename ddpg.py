@@ -22,10 +22,10 @@ LRC = 0.001  # Lerning rate for Critic
 EXPLORE = 100000.
 
 
-def play_game(train_indicator=1, priori_replay_buff=False):
+def play_game(train_indicator=1, usePrioReplayBuff=False):
     """
     :param train_indicator: 1 means Train, 0 means simply Run
-    :param priori_replay_buff: 1 means use prioritized replay buffer, 0 means use normal replay buffer
+    :param usePrioReplayBuff: 1 means use prioritized replay buffer, 0 means use normal replay buffer
     :return:
     """
     action_dim = 3  # Steering/Acceleration/Brake
@@ -49,10 +49,10 @@ def play_game(train_indicator=1, priori_replay_buff=False):
 
     actor = ActorNetwork(sess, state_dim, action_dim, BATCH_SIZE, TAU, LRA)
     critic = CriticNetwork(sess, state_dim, action_dim, BATCH_SIZE, TAU, LRC)
-    if not priori_replay_buff:
+    if not usePrioReplayBuff:
         buff = ReplayBuffer(BUFFER_SIZE)  # Create replay buffer
     else:
-        buff = PrioritizedReplayBuff(BUFFER_SIZE)
+        buff = PrioritizedReplayBuff(BUFFER_SIZE)  # Create prioritized replay buffer
 
     # Generate a Torcs environment
     env = TorcsEnv(vision=vision, throttle=True, gear_change=False)
@@ -113,9 +113,12 @@ def play_game(train_indicator=1, priori_replay_buff=False):
                 ob, r_t, done, info = env.step(a_t[0])
                 s_t1 = np.hstack((ob.angle, ob.track, ob.trackPos, ob.speedX, ob.speedY, ob.speedZ,
                                   ob.wheelSpinVel / 100.0, ob.rpm))
-
-                # Add replay buffer: (state_t, action_t, reward_t, state_t+1, end_or_not)
-                buff.add(s_t, a_t[0], r_t, s_t1, done)
+                # Add transition to replay buffer: (state_t, action_t, reward_t, state_t+1, end_or_not)
+                if usePrioReplayBuff:
+                    transition = np.hstack(s_t, a_t[0], r_t, s_t1, done)
+                    buff.store(transition)
+                else:
+                    buff.add(s_t, a_t[0], r_t, s_t1, done)
 
                 # Do the batch update
                 batch = buff.getBatch(BATCH_SIZE)
